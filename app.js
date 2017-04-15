@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // connecting to database
 
 
-var uri = "mongodb://heroku_kvs4wqgm:b9aet29v3u54743cdtl33pb3r7@ds161630.mlab.com:61630/heroku_kvs4wqgm";
+var uri = "mongodb://heroku_nkccvhqg:uh9u637bvkaeh1kuhv76f87034@ds021761.mlab.com:21761/heroku_nkccvhqg";
 console.log(process.env.MONGOLAB_URI)
 
 
