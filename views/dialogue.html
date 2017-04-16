@@ -1,0 +1,190 @@
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+<link rel="stylesheet" type="text/css" href="css/dialogue/style.css">
+<link rel="stylesheet" type="text/css" href="css/dialogue/style-node.css">
+<link rel="stylesheet" type="text/css" href="css/dialogue/style-dash.css">
+<link rel="stylesheet" type="text/css" href="css/dialogue/style-console.css">
+
+<link rel="stylesheet" href="css/dialogue/Treant.css">
+<link rel="stylesheet" href="css/dialogue/timeline.css">
+
+<script src="js/vendor/treant/raphael.js"></script>
+<script src="js/vendor/treant/Treant.js"></script>
+<script src="js/vendor/treant/timeline.js"></script>
+
+
+ <script type="text/javascript" src="js/dialogue/node.js"></script>
+ <script type="text/javascript" src="js/dialogue/connection.js"></script>
+ <script type="text/javascript" src="js/dialogue/connectionSVG.js"></script>
+ <script type="text/javascript" src="js/dialogue/dialogBuilder.js"></script>
+
+
+ <!--  integration with server -->
+ <script type="text/javascript" src="js/dialogue/server/textarea-helper.js"></script>
+ <script type="text/javascript" src="js/dialogue/server/speech-recognizer.js"></script>
+ <script type="text/javascript" src="js/dialogue/server/serverRequest.js"></script>
+ <script type="text/javascript" src="js/dialogue/server/api-ai-javascript/target/ApiAi.js"></script> 
+
+<div class="container-fluid">
+  <div class="row">
+  	<div class="col-md-12">
+
+
+
+
+
+
+    
+           <div id="content">
+              <div id="svg-connections">
+                 
+              </div>
+
+
+              <div id = "dashboard" class = "dashboard-off">
+                 
+           </div>
+        </div>
+
+
+
+         <div id="node_template" class="mainNode" style="display: none;" >
+            <button class="connect-in connect"></button>
+
+            <div class="node-name"></div>
+            <div class="dropdown">
+               <button class="btn btn-default dropdown-toggle selection" type="button" data-toggle="dropdown"></button>
+               <ul class="dropdown-menu">
+                  <li><a class="hierarchy responceStructure" href="#">hierarchy</a></li>
+                  <li><a class="heterarchy responceStructure" href="#">heterarchy</a></li>
+                  <li><a class="goTo responceStructure" href="#">goto</a></li>
+                 <!--  <li><a class="redirect responceStructure" href="#">redirect</a></li> -->
+               </ul>
+            </div>
+            <button class="connect-out connect hierarchy-out"></button>
+            <!-- <input type="range" class="horazontal-shift-bar" min="0" max="200"> -->
+
+         </div>
+         
+
+
+
+
+
+
+
+
+
+         <div class = "dashboard_template dashboard-on" style="display: none;">
+         <button id ="show-console">  >_  </button>
+         <br>
+         <div class="console">
+            <br><br>
+            <div class="console-response"></div>
+            <h3>Console</h3>
+            <textarea class="console-input"></textarea><div class="speech-mic"></div>
+            <br>
+         </div>
+
+         <div class="line"></div>
+         <br>
+         
+
+         <h3>Node <button class ="force-node">  Force </button></h3>
+         <input id="input-node-name-dash"></input>
+
+
+         <div class="chart" id="OrganiseChart-simple" width="100%">
+         </div>
+
+         
+         <div id="node-content-dash">
+            <br>
+            <h4>Conditions</h4>
+            <div id = 'conditions-dash'>
+               <input id="conditions-input-dash">
+            </div>
+            <h4>Outputs</h4>
+            <ul id="outputs-dash">
+               <!-- <li class="output-dash">
+                  <div class="input-container">
+                   <span class="input-span" contenteditable="true"></span>
+                </div>
+                <input class="output-text-values-dash">
+                <button class="addRemove remove-output">-</button><button class="addRemove add-output">+</button></input>
+             </li> -->
+          </ul>
+          <br><br>
+         
+
+          <br><br>
+          <h1 id="next-classification"></h1>
+          <ul id="next-dash">
+             
+          </ul>
+          <br><br>
+          <h4>Parent</h4>
+          <div id="parent-dash"></div>
+
+          <br><br>
+          <button class="delete-node">XX Delete Node XX </button>
+             
+          </ul>
+
+       </div>
+   </div>
+
+
+
+
+
+
+
+
+
+   <li class="output-dash output-dash-template" style="display: none;">
+   <div class="input-container">
+    <span class="input-span" contenteditable="true"></span>
+    </div>
+    <!-- <input class="output-text-values-dash"> -->
+    <button class="addRemove remove output">-</button><button class="addRemove add output">+</button></input>
+   </li>
+
+
+
+
+
+   <li class="next-node-template" style="display: none;">
+    <div class="next-node-name"></div>
+    <button class="addRemove remove next-node rem">-</button>
+   </li>
+
+
+
+   <li class="sibling-template sibling-dash" style="display: none;">
+    <div class="sibling-name"></div>
+    <button class="addRemove remove sibling rem">-</button>
+   </li>
+
+
+
+      <div id="mouse-div" style="display: normal;" > 
+      </div>
+      <script type="text/javascript"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  	</div>
+  </div>
+</div>

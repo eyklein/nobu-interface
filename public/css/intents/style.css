@@ -1,0 +1,132 @@
+/*@font-face {
+   font-family: 'Open Sans', sans-serif;
+   src: url("fonts/Open_Sans/OpenSans-Light.ttf");
+   font-weight: light;
+}
+@font-face {
+   font-family: 'Open Sans', sans-serif;
+   src: url("fonts/Open_Sans/OpenSans-Regular.ttf");
+   font-weight: regular;
+}*/
+#content{
+	font-family:Open Sans;
+}
+
+.htmlClass{
+		padding:8px;
+		border:1px solid blue;
+		margin-bottom:8px;
+		background-color: red;
+	}
+
+.entityCatagory{
+	background-color: #ededed;
+	padding:20;
+	margin: 20;
+}
+.input-intent{
+	background-color: inherit;
+	font-size:30px;
+	display: block;
+	padding-left: 40px;
+	clear:both;
+
+}
+.intent{
+	display: block;
+	background-color: #f2f2f2;
+	padding:10;
+	margin: 10;
+	margin-left: 30;
+	border-style: solid;
+	border-color: #ededed;
+
+}
+.input-entity{
+	font-size:24px;
+}
+.input-value{
+	font-size:18px;
+	width:100%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-right: 0px;
+	clear:both;
+
+
+
+}
+.value{
+	display: block;
+	/*background-color: #c6c4c4;*/
+	/*border: 1px solid #636363;
+    border-radius: 5px;*/
+	padding:10;
+	border-color: #f2f2f2;
+	border-style: solid;
+
+	margin-left: 30;
+	background-color: #e6e6e6
+
+}
+.value:hover { 
+    
+    background-color: #cccccc;
+}
+input{
+	background-color: inherit;
+	font-family:Open Sans;
+	border: none;
+	/*padding-top: 5px;
+	padding-bottom: 5px;
+	margin-right: 0px;*/
+}
+button{
+	background-color: #b3b3b3;
+	font-family:Open Sans;
+	font-size:18px;
+	border: none;
+
+
+
+}
+button:hover{
+	cursor: pointer;
+	background-color: #f2f2f2;
+
+}
+.new-value-button{
+	background-color: #e6f3ea;
+}
+.new-value-button:hover{
+	background-color: #a1d8b2;
+}
+.addRemove{
+	height: 30px;
+    width: 30px;
+	border-radius: 50%;
+}
+.right{
+	margin: auto;
+	position: absolute;
+	right:-15;
+}
+.left{
+	margin: auto;
+	position: absolute;
+	z-index: 1000;
+
+}
+.middle{
+	top:0;
+	bottom: 0;
+}
+.remove{
+	/*background-color: #800000;*/
+	opacity: .1;
+}
+.remove:hover{
+	background-color: #800000;
+	opacity: 1;
+	color:white;
+}

@@ -1,0 +1,58 @@
+
+<script type="text/javascript" src="/js/intents/intents.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/intents/style.css">
+<div class="container-fluid">
+  <div class="row">
+  	<div class="col-md-12">
+      <div class="well bs-component">
+      	<form action="/addEntities" method='POST'>
+      		<fieldset id="intentFieldSet">
+            
+                                
+      		</fieldset>
+          <button id="newIntent" type="button">New Intent</button>
+          <button id="saveJSON"  type="button">save json</button>
+      	</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="intent_template" class="intent form-group col-lg-11 col-lg-offset-1 grid" style="display: none;"> 
+  <!-- <label for="entries" class="col-lg-1 col-lg-offset-1">Group</label> -->
+  <div class="row">
+  <button class="remove-intent addRemove remove left" type="button">-</button>
+  <input class="input-intent col-lg-4 col-lg-4  col-md-4 col-md-4"></input>
+  </div>
+
+  <button class="new-phrase-button" type="button">New Entity</button>
+  <br>
+  <div class="phrases">
+  </div>
+</div>
+
+
+<div id="phrase_template" class="phrase col-lg-offset-1 row grid" style="display: none;"> 
+
+  <div class="row">
+    <button class="remove-phrase addRemove remove col-lg-offset-0 col-md-offset-0" type="button">-</button>
+    <input class="input-phrase col-lg-6 col-md-6 col-sm-6" type="text" name="unknownYet" placeholder="..."></input>
+
+  </div>
+
+
+  <!-- <button class="new-value-button addRemove col-lg-offset-1 col-md-offset-1 col-sm-offset-1 row" type="button">+</button> -->
+</div>
+
+
+
+
+
+
+
+
+

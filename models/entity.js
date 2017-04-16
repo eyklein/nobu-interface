@@ -24,12 +24,7 @@ var entitiesSchema = new Schema({
 	dateAdded : { type: Date, default: Date.now }
 })
 
-var intentsSchema = new Schema({
-	json : { type: Array },
-	dateAdded : { type: Date, default: Date.now }
-})
 
 
 // export 'Food' model so we can interact with it in other files
 module.exports = mongoose.model('Entity',entitiesSchema);
-module.exports = mongoose.model('Intents',intentsSchema);

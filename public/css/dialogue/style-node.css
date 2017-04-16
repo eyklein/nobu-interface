@@ -1,0 +1,284 @@
+.mainNode{
+	background-color: lightgray;
+    width: 130px;
+    height:30px;
+	position: absolute;
+	z-index:100;
+	opacity: 0.9;
+	padding: 0;
+	border-style: solid;
+	border-color: white;
+	border-width: 1;
+	border-radius: 5;
+	margin: 50;
+}
+.no-output{
+	opacity: 0.7;
+	background-color: lightgray;
+	color:white;
+	border-style: dashed;
+}
+.svg-connect{
+	z-index: 0;
+	position: absolute;
+	width:10000px;
+	height: 10000px;
+	overflow: visible;
+/*	box-sizing: content-box
+	overflow: visible;*/
+}
+.svg-div{
+	z-index: 0;
+}
+
+.force-node{
+	font-size:10;
+}
+
+
+
+.mainNode.active{
+	background-color: gray;
+	border-color: blue;
+	border-style: solid;
+	box-shadow: 0 0 5px rgba(81, 203, 238, 3);
+	z-index: 200;
+	color:white;
+}
+
+.node-content{
+	
+}
+
+div.node-name{
+	padding:5px;
+	width:70%;
+	/*margin-top:-20;
+	margin-left:-20;*/
+	position: absolute;
+	top:0;
+	left:0;
+	float: left;
+	overflow: hidden;
+}
+.blue{
+	position: absolute;
+	left:60%;
+	top:0px;
+	width:20%;
+	height:100%;
+	background-color: blue;
+	float: left;
+}
+.dropdown{
+	position: absolute;
+	bottom:0;
+	right:0;
+	margin: 0;
+}
+.addRemove{
+	height: 20px;
+    width: 20px;
+	border-radius: 50%;
+	color: white;
+	margin-left: 0px;
+	border: none;
+}
+.remove:hover{
+	background-color: #800000;
+	color:white;
+}
+.output-text-values{
+	margin-left: 30px;
+}
+.add:hover{
+	background-color: #999999;
+	color:white;
+}
+
+
+
+
+/*dropdown*/
+.selection{
+
+	width:10px;
+	height: 100%;
+}
+
+
+
+
+/* _________________________ connections ________________________________*/
+
+.connect-out{
+	display: block;
+
+	/*color: white;*/
+	position:absolute;
+	bottom: -30px;
+
+	/*border-bottom-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+*/
+
+}
+
+.connect-in{
+	position:relative;
+	top: -30px;
+
+	background-image: url("../../img/line_in_half.svg");
+	/*background: url("img/hierarchy.svg");*/
+	/*background-color: red;*/
+	color: white;
+	/*border-top-left-radius: 50%;
+	border-top-right-radius: 50%;*/
+}
+
+.connect{
+	height: 30px;
+    width: 30px;
+	/*color: white;*/
+	/*background-color: transparent;*/
+	background-repeat: no-repeat;
+}
+
+.connection{
+	/*color:red;*/
+	/*border-width: 3;*/
+	border-radius: 20px;
+	z-index:0;
+
+	border-style: solid;
+	border-width: 5px;
+	opacity: .5;
+}
+
+.connection.hierarchy{
+	border-color: blue;
+	border-radius: 100%;
+}
+.connection.heterarchy{
+	border-color: red;
+	border-radius: 100%;
+}
+.connection.goto{
+	border-color: green;
+	border-radius: 100%;
+	opacity: .2;
+	/*border-style: dotted;*/
+}
+.connection.redirect{
+	border-color: yellow;
+	border-radius: 100%;
+	opacity: .5;
+	/*border-style: dotted;*/
+}
+.sibling-connection{
+	/*color:red;*/
+	/*border-width: 3;*/
+	border-radius: 10px;
+	z-index:0;
+
+	border-style: solid;
+	border-width: 3px;
+	opacity: .7;
+}
+/*.sibling-connection.hierarchy{
+	border-color: blue;
+}
+.sibling-connection.heterarchy{
+	border-color: red;
+}
+.sibling-connection.goto{
+	border-color: green;
+}*/
+/*.linear-child:active{
+	color:black;
+	border-width: 15;
+}*/
+
+.hierarchy-out{
+	background-image: url("../../img/hierarchy.svg");
+}
+.heterarchy-out{
+	background-image: url("../../img/heterarchy.svg");
+}
+.goto-out{
+	background-image: url("../../img/goto.svg");
+}
+.redirect-out{
+	background-image: url("../../img/redirect.svg");
+}
+
+
+
+
+
+
+
+/* _________________________ mouse connections ________________________________*/
+.mouse-connect{
+	
+}
+.child-mouse{
+	border-color: darkgray;
+	border-style: dashed;
+	border-width: 8;
+}
+.sibling-mouse{
+	border-color: lightgray;
+	border-style: dashed;
+	border-width: 4;
+
+}
+#mouse-div{
+	z-index: -100;
+	width:1px;
+	height:1px;
+}
+
+
+
+
+/*this if i want a slider bar to control possition*/
+.horazontal-shift-bar[type=range]{
+    -webkit-appearance: none;
+    -webkit-transform: rotate(90deg);
+    width: 200px;
+    top:130px;
+    left:0px;
+    min:0px;
+    max:30px;
+    height: 0px;
+
+    position: absolute; 
+}
+
+.horazontal-shift-bar[type=range]::-webkit-slider-runnable-track {
+    
+
+    background: transparent;
+    background: rgba(20,20,20,.1);
+    border: none;
+    border-radius: 3px;
+}
+
+.horazontal-shift-bar[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -4px;
+}
+
+.horazontal-shift-bar[type=range]:focus {
+    outline: none;
+}
+
+.horazontal-shift-bar[type=range]:focus::-webkit-slider-runnable-track {
+    background: rgba(200,0,0,.1);
+}

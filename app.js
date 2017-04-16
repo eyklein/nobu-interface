@@ -52,33 +52,53 @@ console.log("connected to database");
 var routes = require('./routes/index.js');
 
 // home page
-// app.get('/', routes.index); // calls index function in /routes/index.js
-app.get('/', function (req, res) {
-  console.log("fuck yeah")
-  res.send('hello world')
-})
+app.get('/', routes.index); // calls index function in /routes/index.js
+
+app.get('/dialogue',routes.dialogue);
+app.get('/entities',routes.entities);
+app.get('/intents',routes.intents);
+
+app.post('/addEntities',routes.addEntitiesToDB);
+app.post('/addIntents',routes.addIntentsToDB);
+
+
+app.get('/getLatestEntities', routes.getLatestEntities);
+app.get('/getLatestIntents', routes.getLatestIntents);
+
+
+
+
+
+
+
+
+
+// app.get('/', function (req, res) {
+//   console.log("fuck yeah")
+//   res.send('hello world')
+// })
 
 //add new food routes
-app.get('/add',routes.addFoodForm); //display form to add a new food product
-app.post('/add',routes.addFoodToDb); //form POST submits here
+// app.get('/add',routes.addFoodForm); //display form to add a new food product
+// app.post('/add',routes.addFoodToDb); //form POST submits here
 
 // display a single food item
 // for example '/food/chunky-peanut-butter'
-app.get('/food/:slug', routes.oneFood);
+// app.get('/food/:slug', routes.oneFood);
 
-// edit food item
-app.get('/food/:slug/edit', routes.editFoodForm); //GET the edit form
-app.post('/food/:slug/edit', routes.updateFoodToDb); //PUT - update food
+// // edit food item
+// app.get('/food/:slug/edit', routes.editFoodForm); //GET the edit form
+// app.post('/food/:slug/edit', routes.updateFoodToDb); //PUT - update food
 
-// delete a food
-app.get('/food/:slug/delete', routes.deleteFood);
+// // delete a food
+// // app.get('/food/:slug/delete', routes.deleteFood);
 
-// increment food's upvotes
-app.get('/food/:slug/upvote', routes.incrementUpvote);
+// // increment food's upvotes
+// app.get('/food/:slug/upvote', routes.incrementUpvote);
 
-// Make the data into an API - JSON Data routes
-app.get('/api/food',routes.allFoodApi);
-app.get('/api/food/:slug', routes.oneFoodApi);
+// // Make the data into an API - JSON Data routes
+// app.get('/api/food',routes.allFoodApi);
+// app.get('/api/food/:slug', routes.oneFoodApi);
 
 // create NodeJS HTTP server using 'app'
 http.createServer(app).listen(app.get('port'), function(){

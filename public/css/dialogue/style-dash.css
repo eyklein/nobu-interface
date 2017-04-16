@@ -1,0 +1,84 @@
+#dashboard{
+	padding:30px;
+	position:fixed;
+	top:0px;
+	width:800px;
+	height:100%;
+	z-index: 1000;
+	background-color: lightgray;
+	overflow: scroll;
+}
+.dashboard-on{
+	position:fixed;
+	right:0px;
+}
+.dashboard-off{
+	right:-780px;
+}
+
+#input-node-name-dash{
+	font-size:25px;
+	width:90%;
+}
+#conditions-input-dash{
+	font-size:20px;
+
+	width:90%;
+	
+}
+
+.input-container 
+{
+    border: solid 1px black;
+    width:90%;
+    left:10%;
+    /*background-color: red;*/
+    min-height : 1.5em;
+    margin: 10;
+    background-color: white;
+    border: none;
+}
+
+#outputs-dash{
+	list-style-type: none;
+}
+#next-dash{
+	list-style-type: none;
+	font-size:25;
+}
+.next-node-name{
+	width: 70%;
+    margin: 0px;
+    display: inline-block;
+}
+.addRemove.next-node{
+	width:50px;
+	height:50px;
+	vertical-align: middle;
+	background-color: #999;
+	
+/*	right:0;
+	top:0;*/
+}
+.addRemove.next-node:hover{
+	background-color: #800000;
+}
+
+#parent-dash{
+	margin-left: 35px;
+	font-size:35;
+}
+.highlight-this-sibling{
+	color:red;
+}
+
+
+.input-span{
+    border: none;
+
+}
+.input-span:focus{
+    border: none;
+    outline: 0px solid transparent;
+}
+}

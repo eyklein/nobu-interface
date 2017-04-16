@@ -1,0 +1,162 @@
+
+
+@font-face {
+   font-family: 'Open Sans', sans-serif;
+   src: url("fonts/Open_Sans/OpenSans-Light.ttf");
+   font-weight: light;
+}
+@font-face {
+   font-family: 'Open Sans', sans-serif;
+   src: url("fonts/Open_Sans/OpenSans-Regular.ttf");
+   font-weight: regular;
+}
+html, body {  
+
+
+
+    /*margin: 0;
+    height: 100%;*/
+    height: 1000%;
+    width: 1000%;
+
+    background-size: 50px 50px;
+    background-image: linear-gradient(to right, rgba(0,0,0,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,.05) 1px, transparent 1px);
+    /*overflow: scroll;*/
+}
+#nav-bar {
+	
+	margin-left: 200px;
+	z-index: 100000;
+}
+#content{
+	font-family:Open Sans;
+	height:100%;
+	width:100%;
+	top:0px;
+	left:0px;
+
+}
+#console-node{
+	opacity: 0.5;
+	/*position: fixed;*/
+	top:0px;
+	left:0px;
+
+}
+
+
+
+
+
+.dropdown{
+	bottom: 0px;
+	margin: 20px;
+	margin-bottom:-20px;
+}
+
+
+.connection{
+
+}
+
+
+
+
+
+input{
+	margin: 10px;
+}
+
+button{
+	border: none;
+	background-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+
+polyline{
+	stroke:red;
+	fill:none;
+	stroke-width:5px;
+	stroke-linejoin: round;
+	/*stroke-dasharray: 5,5;*/
+}
+
+
+.heterarchy{
+	stroke:rgba(200,20,20,.4);
+}
+.hierarchy{
+	stroke:rgba(20,20,200, .4);
+}
+.goto{
+	stroke:rgba(20,20,20, .05);
+	
+}
+.redirect{
+	stroke:rgba(20,200,20,.05);
+}
+
+/*path.active{
+	
+	stroke:red;
+	opacity:100;
+}*/
+
+
+.heterarchy.active{
+	stroke:rgba(200,20,20,1);
+}
+.hierarchy.active{
+	stroke:rgba(20,20,200, 1);
+}
+.goto.active{
+	stroke:rgba(20,20,20, .5);
+	
+}
+.redirect.active{
+	stroke:rgba(20,200,20,.5);
+}
+
+
+
+
+path{
+	z-index: 100;
+	/*stroke:inherit;*/
+	fill:none;
+	/*fill:transparent;*/
+	/*fill:red;*/
+	stroke-width:5px;
+	stroke-linejoin: round;
+	/*stroke-dasharray: 5,5;*/
+}
+
+.node.acvtive{
+	background-color: red;
+}
+.node.goto{
+	opacity: 50px;
+	border-style: dashed;
+}
+
+
+/*path:hover{
+	
+	fill:blue;
+}*/
+
+
+
+
+
+
+
+

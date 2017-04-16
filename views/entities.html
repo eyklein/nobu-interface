@@ -1,0 +1,61 @@
+
+<script type="text/javascript" src="/js/entities/entities.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/entities/style.css">
+<div class="container-fluid">
+  <div class="row">
+  	<div class="col-md-12">
+      <div class="well bs-component">
+      	<form action="/addEntities" method='POST'>
+      		<fieldset id="entityFieldSet">
+            
+                                
+      		</fieldset>
+          <button id="newEntityCatagory" type="button">New Catagory</button>
+          <button id="saveJSON"  type="button">save json</button>
+      	</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="entityCatagory_template" class="entityCatagory form-group col-lg-11 col-lg-offset-1 grid" style="display: none;"> 
+  <!-- <label for="entries" class="col-lg-1 col-lg-offset-1">Group</label> -->
+  <div class="row">
+  <button class="remove-entity addRemove remove left" type="button">-</button>
+  <input class="input-catagory col-lg-4 col-lg-4  col-md-4 col-md-4"></input>
+  </div>
+
+  <button class="new-entity-button" type="button">New Entity</button>
+  <br>
+  <!-- <label for="entity" class="col-lg-1 col-lg-offset-1">Entities:</label> -->
+</div>
+
+<div id="entity_template" class="entity col-lg-offset-1 row grid" style="display: none;"> 
+
+  <div class="row">
+    <button class="remove-entity addRemove remove col-lg-offset-0 col-md-offset-0" type="button">-</button>
+    <input class="input-entity " type="text" name="unknownYet" placeholder="..."></input>
+
+  </div>
+
+
+  <button class="new-value-button addRemove col-lg-offset-1 col-md-offset-1 col-sm-offset-1 row" type="button">+</button>
+
+  
+</div>
+<div id="value_template" class="value  col-lg-2 col-lg-offset-1  col-md-2 col-md-offset-1  col-sm-10 row" style="display: none;"> 
+    
+  <input class="input-value col-lg-4 col-md-4 col-sm-4" placeholder="..."></input>
+  <button class="remove-value addRemove remove right middle" type="button">-</button>
+
+ 
+</div>
+
+
+
+
+
