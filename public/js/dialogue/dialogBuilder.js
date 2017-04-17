@@ -1,4 +1,4 @@
-var nodeObjs; //=new Nodes();
+
 
 var $fromConnection;
 var fromSiblingConnection;
@@ -18,7 +18,7 @@ var loadingNode=false;
 var xSpacing = 150
 var ySpacing = 150;
 
-var dashboard;
+
 
 var draggingNode = false
 var shiftPressed=false
@@ -32,22 +32,16 @@ var intervalMouse
 $(document).ready(function() {
 	console.log("loaded...")
 
-	nodeObjs = new Nodes();
+	// nodeObjs = new Nodes();
 
-	dashboard = new Dashboard();
 
-	$.ajax({
-	  dataType: "json",
-	  url: "https://eyk287.itp.io:5000/static/new_node.json",
-	  success: processJSON
-	});
 	
-	// url: "https://eyk287.itp.io:5000/static/new_nodes.json",
-	window.onbeforeunload = function(e) {
-	    return 'Ask user a page leaving question here';
-	}; 
-
-
+	// $.ajax({
+	//   dataType: "json",
+	//   url: "/getLatestNodes",
+	//   success: processJSON
+	// });
+	
 	//create new node
 	newNodeConsole($("#content"));
 
@@ -244,25 +238,8 @@ $(document).ready(function() {
 			if(dashboard.isVisable){
 				dashboard.updateDashboard()
 			}
-			// if(fromSiblingConnection){
-			// 	nodeNameTo = $(e.target).parent().attr('id');
-			// 	nodeTo = nodeObjs.nodesDict[nodeNameTo]
 
-			// 	nodeNameFrom=$(fromSiblingConnection).parent().attr('id');
-			// 	nodeFrom = nodeObjs.nodesDict[nodeNameFrom]
-			// 	nodeFrom.addConnectionTo(nodeTo, "sibling")
-			// }
 		}
-
-
-		// $(document).on('mousedown', function(e) {
-		// 	console.log("this")
-		// 	console.log(this)
-		// 	console.log("e.taget")
-		// 	console.log(e.target)
-		// 	// console.log(e.srcElement.tagName)
-			
-		// });
 
 
 
@@ -300,21 +277,7 @@ $(document).ready(function() {
 		nodeFocus($(this).find(".node-name").html())
 	});
 
-	
 
-	//hid dashboard
-	$("#content").on('click', function(e) {
-		// console.log("clicke
-		// console.log($(e.target))
-		console.log("hiding1")
-		console.log(e.target)
-		console.log($(e.target).hasClass("svg-connect"))
-		if(e.target == this || $(e.target).hasClass("connetion") || $(e.target).hasClass("svg-connect") || $(e.target).hasClass("svg-connect")){
-			console.log("hiding2")
-			dashboard.hide()
-		}	
-	});
-	//or click a connection
 
 
 
@@ -325,30 +288,7 @@ $(document).ready(function() {
 
 
 
-	//******************************* dashboard ************************************
-	//update node values from dash
-	$("#content").on('change', "#input-node-name-dash", function() {
-		//remove space
-		var inputVal = $(this).val().replace(/ /g, "_")
-		$(this).val(inputVal);
-
-		//change the name of the key, node object, parent div, and connetion ids
-		dashboard.currentNode.changeDivName(inputVal);
-		dashboard.currentNode.changeName(inputVal);
-	});
-
-	$("#content").on('change', "#conditions-input-dash", function() {
-
-		//change the name of the key, node object, parent div, and connetion ids
-		inputVal = $(this).val()
-		dashboard.currentNode.changeConditions(inputVal);
-	});
-
-
-	$(document).on('click', ".force-node", function(e) {
-		// console.log(dashboard.currentNode.name)
-		sendForceNodeRequest(dashboard.currentNode.name)
-	});
+	
 
 
 
@@ -359,36 +299,7 @@ $(document).ready(function() {
 
 
 
-	//remove child
 	
-	$("#content").on('click', ".remove.next-node.child", function() {
-		//remove parent from child
-
-		var nextNode=nodeObjs.nodesDict[$(this).parent().find('.next-node-name').html()]
-
-
-		var parentNode = nextNode.parent;
-		nextNode.removeParent()
-		parentNode.removeChild(nextNode.name)
-
-
-		parentNode.updateConnectionsSVG();
-
-	
-		dashboard.updateDashboard();
-	});
-	//remove goto
-	$("#content").on('click', ".remove.next-node.goto", function() {
-		//remove parent from child
-
-		dashboard.currentNode.gotoRedirect.remove();
-
-
-		dashboard.currentNode.updateConnectionsSVG();
-
-	
-		dashboard.updateDashboard();
-	});
 
 
 
@@ -396,30 +307,6 @@ $(document).ready(function() {
 
 
 
-
-	//add remove output
-	$("#content").on('click', ".add.output", function() {
-		loadingNode=true;
-		newNodeDiv = $(this).parent().clone().insertAfter($(this).parent());
-		newNodeDiv.find(".input-span").text("")
-		dashboard.currentNode.insertOutValue("", $("li").index(newNodeDiv))
-		loadingNode=false;
-	});
-	$("#content").on('click', ".remove.output", function() {
-		dashboard.currentNode.deleteOutValue($("li").index($(this).parent()))
-		$(this).parent().remove();
-	});
-
-	// add/ change output on change
-	$("#content").on('DOMSubtreeModified', ".input-span", function() {
-		dashboard.currentNode.updateOutput(this)
-	});
-
-	$("#content").on("click", '.delete-node', function(){
-		
-		//remove from dict
-		nodeObjs.deleteNode(dashboard.currentNode)
-	})
 
 
 
@@ -442,7 +329,6 @@ function newNodeConsole(parent) {
 	console.log(parent)
 	newNodeDiv = $("#node_template").clone().attr('id', "console-node").attr('style', 'curved').appendTo(parent);
 	console.log(newNodeDiv)
-	//?????????????????????***
 	newNodeDiv.draggable()
 	newNodeDiv.offset({
 		top: 20,
@@ -487,42 +373,7 @@ function nodeFocus(nodeName_){
 
 
 
-function processJSON(data) {
-	
 
-	//create all nodes
-	for (i = 0; i < data.length; i++) {
-		nodeObjs.addNode(newNodeConsole($("#content")), data[i].dialog_node)
-	}
-
-	//add data from json 
-	for (i = 0; i < data.length; i++) {
-		nodeObjs.nodesDict[data[i].dialog_node].processJSON(data[i])
-	}
-
-	// for (i = 0; i < data.length; i++) {
-	// 	nodeObjs.nodesDict[data[i].dialog_node].updateConnections();
-	// }
-
-	for (i = 0; i < data.length; i++) {
-		nodeObjs.nodesDict[data[i].dialog_node].placePosition();
-	}
-
-	for (i = 0; i < data.length; i++) {
-		nodeObjs.nodesDict[data[i].dialog_node].updateConnectionsSVG();
-	}
-
-
-
-	
-
-	//color connections
-	// for (i = 0; i < data.length; i++) {
-	// 	nodeObjs.nodesDict[data[i].dialog_node].refreshConnectionToChildren();
-	// }
-	// organize();
-
-}
 
 function exportJSON(){
 	jsonOut=[]
@@ -530,8 +381,19 @@ function exportJSON(){
 		//console.log(nodeObjs.nodesDict[key].getJSON())
 		jsonOut.push(nodeObjs.nodesDict[key].getJSON());
 	}
-	sendJSONNodes(jsonOut)
+	// sendJSONNodes(jsonOut)
+	// post('/addNodes',{"json":JSON.stringify(jsonOut)})
 	// return JSON.stringify(jsonOut);
+	$.ajax({
+        url: '/addNodes',
+        type: 'POST',
+        data: {
+            "jsonArray": JSON.stringify(jsonOut)
+        },
+        success: function(data){
+            console.log(data);
+        }
+    });
 }
 
 
@@ -545,133 +407,6 @@ function placeNode(node_){
 		node.removeDiv();
 		nodeObjs.removeNode(node);
 		
-	}
-}
-
-function Dashboard(){
-	this.$dash=$('#dashboard');
-
-	this.currentNode;
-	this.isVisable=false
-
-	this.inputConsole
-
-	this.hide = function(){
-		this.isVisable=false
-		
-		this.$dash.removeClass("dashboard-on");
-		this.$dash.addClass("dashboard-off");
-		this.$dash.addClass("fuckermother");
-
-
-		$('.active').removeClass("active");
-	}
-
-	this.show=function(node_){
-		this.isVisable=true
-		this.currentNode = node_
-		// $('.active').removeClass("active");
-
-		this.$dash.removeClass("dashboard-off");
-		this.$dash.addClass("dashboard-on");
-
-		node_.$myDiv.addClass("active");
-		node_.activateConnections();
-
-
-
-		this.updateDashboard();
-	}
-
-	this.updateDashboard = function() {
-		console.log("UPDATING DASH")
-		loadingNode=true;
-		this.$dash = $(".dashboard_template").clone()
-		$('#dashboard').replaceWith(this.$dash)
-		this.$dash.attr('id', 'dashboard');
-		this.$dash.removeClass("dashboard_template")
-		this.$dash.show();
-
-		this.$dash.find(".console-input").addClass("active")
-
-		this.inputConsole=this.$dash.find(".console-input.active")
-
-
-
-		
-
-
-		// $("#content").find("#dashboard_template").clone().insertAfter($("#outputs-dash").find(".input-span").parent());
-
-
-		$("#input-node-name-dash").val(this.currentNode.name);
-		$("#conditions-input-dash").val(this.currentNode.conditions);
-		for(var i=0; i<this.currentNode.output.values.length; i++){
-			// $("#outputs-dash").find(".input-span").text(node_.output.values[i]);
-			newOutputDiv = $(".output-dash-template").clone();
-			$("#outputs-dash").append(newOutputDiv);
-			newOutputDiv.removeClass("output-dash-template");
-			newOutputDiv.find(".input-span").text(this.currentNode.output.values[i])
-			newOutputDiv.show();
-
-		}
-
-
-
-
-		// $("#passon-dash").html(this.currentNode.type);
-
-		if(this.currentNode.children.length>0){
-			$("#next-classification").html("Children")
-			for(var i=0; i<this.currentNode.children.length; i++){
-				// $("#outputs-dash").find(".input-span").text(this.currentNode.output.values[i]);
-				newChildDiv = $(".next-node-template").clone();
-				$("#next-dash").append(newChildDiv);
-				newChildDiv.removeClass("next-node-template");
-				newChildDiv.find(".next-node").addClass("child");
-				newChildDiv.find(".next-node-name").html(this.currentNode.children[i].name)
-				newChildDiv.show();
-			}
-		}else if(this.currentNode.gotoRedirect.targetNode){
-			$("#next-classification").html("Goto")
-			newChildDiv = $(".next-node-template").clone();
-			$("#next-dash").append(newChildDiv);
-			newChildDiv.removeClass("next-node-template");
-			newChildDiv.find(".next-node").addClass("goto");
-			newChildDiv.find(".next-node-name").html(this.currentNode.gotoRedirect.targetNode.name)
-			newChildDiv.show();
-
-		}else{
-			$("#next-classification").html("NO OUTPUT")
-		}
-
-		if(this.currentNode.parent != null){
-			$("#parent-dash").html(this.currentNode.parent.name);
-
-			
-
-		}
-		new Treant(new Chart(this.currentNode).getChart());
-
-		newOutputDiv = $(".output-dash-template").clone();
-		$("#outputs-dash").append(newOutputDiv);
-		newOutputDiv.removeClass("output-dash-template");
-		newOutputDiv.show();
-
-		if(this.currentNode.parent != null){
-			for(var i=0; i<this.currentNode.parent.children.length; i++){
-				// $("#outputs-dash").find(".input-span").text(this.currentNode.output.values[i]);
-				newSiblingDiv = $(".sibling-template").clone();
-				$("#siblings-dash").append(newSiblingDiv);
-				newSiblingDiv.removeClass("sibling-template");
-				if(this.currentNode.parent.children[i].name == this.currentNode.name){
-					newSiblingDiv.addClass("highlight-this-sibling")
-				}
-				newSiblingDiv.find(".sibling-name").html(this.currentNode.parent.children[i].name);
-				newSiblingDiv.show();
-			}
-		}
-		loadingNode=false;
 	}
 }
 

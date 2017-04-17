@@ -121,7 +121,7 @@ $(document).ready(function() {
 
 function processJSON(data){
 	
-	data=JSON.parse(data.json)
+	data=data.json
 	for(i =0; i<data.length; i++){
 		console.log(data[i].entity)
 		if(data[i].type in catagoriesDict){
@@ -230,9 +230,17 @@ function createJSONText(data){
 
 
 	// entitySend = {"json":entities}
-	entitySend = {"json":JSON.stringify(entities)}
-
-	post('/addEntities',entitySend)
+	
+	$.ajax({
+        url: '/addEntities',
+        type: 'POST',
+        data: {
+            "jsonArray": JSON.stringify(entities)
+        },
+        success: function(data){
+            console.log(data);
+        }
+    });
 
 
 	

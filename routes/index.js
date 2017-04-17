@@ -7,6 +7,7 @@
 
 var Entity = require("../models/entity.js"); //our db model
 var Intent = require("../models/intent.js"); //our db model
+var Nodes = require("../models/nodes.js"); //our db model
 
 /*
 	GET /
@@ -101,70 +102,62 @@ exports.intents = function(req, res) {
 
 
 exports.addEntitiesToDB = function(req, res) {
-	
-	console.log("received form submission");
-	console.log(req); // data to save
-
-	console.log(req.body.json)
-
-	// accept form post data
-	// make it into an object we'll save
 	var entityToSave = new Entity({
-		json : req.body.json
+		json : JSON.parse(req.body.jsonArray)
 	});
 	
 	// save the food to the database
 	entityToSave.save(function(err,data){
 		if (err) {
-			// if there's an error on saving (perhaps a validation error?)
-			console.log("Error on saving the entitiy");
-			console.log(err); // log out to Terminal all errors
-
-
-			res.render('entities.html');
+			res.json('failure');
 
 		} else {
-			console.log("Created a new entity!");
-			console.log(data);
-			
-			// redirect to this new food's page
-			res.redirect('back');
+			console.log("saved entities")
+			res.json('success');
 		}
 	});
+
 };
 
 exports.addIntentsToDB = function(req, res) {
-	
-	console.log("received form submission");
-	console.log(req); // data to save
 
-	console.log(req.body.json)
-
-	// accept form post data
-	// make it into an object we'll save
 	var intentToSave = new Intent({
-		json : req.body.json
+		json : JSON.parse(req.body.jsonArray)
 	});
 	
 	// save the food to the database
 	intentToSave.save(function(err,data){
 		if (err) {
-			// if there's an error on saving (perhaps a validation error?)
-			console.log("Error on saving the entitiy");
-			console.log(err); // log out to Terminal all errors
-
-
-			res.render('entities.html');
+			res.json('failure');
 
 		} else {
-			console.log("Created a new intent!");
-			console.log(data);
-			
-			// redirect to this new food's page
-			res.redirect('back');
+			console.log("saved intents")
+			res.json('success');
 		}
 	});
 };
+
+
+exports.addNodesToDB = function(req, res) {
+
+	var nodesToSave = new Nodes({
+		json : JSON.parse(req.body.jsonArray)
+	});
+	
+	// save the food to the database
+	nodesToSave.save(function(err,data){
+		if (err) {
+			res.json('failure');
+
+		} else {
+			console.log("saved nodes")
+			res.json('success');
+		}
+	});
+};
+
+
+
 
 exports.getLatestEntities = function(req, res){
 	// enetities = Entity.find({}, {sort:{$natural:-1}})
@@ -193,6 +186,25 @@ exports.getLatestIntents = function(req, res){
 
 
 	intent.exec(function(err, data){
+
+		// prepare data for JSON
+		var jsonData = {
+			status : 'OK',
+			json : data[0].json,
+			dateAdded: data[0].dateAdded
+		}
+
+		res.json(jsonData);
+	});
+}
+
+exports.getLatestNodes = function(req, res){
+	// enetities = Entity.find({}, {sort:{$natural:-1}})
+	nodes = Nodes.find().limit(1).sort({$natural:-1})
+	
+
+
+	nodes.exec(function(err, data){
 
 		// prepare data for JSON
 		var jsonData = {

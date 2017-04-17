@@ -54,7 +54,11 @@ function Node(name_, $div_) {
 		// }else{
 		// 	jsonOut["previous_sibling"]=null
 		// }
-		jsonOut["conditions"] = this.conditions
+		if(this.conditions){
+			jsonOut["conditions"] = this.conditions
+		}else{
+			jsonOut["conditions"] = true;
+		}
 
 		if(this.gotoRedirect.isSet){
 			jsonOut["go_to"] = this.gotoRedirect.getJSON();
@@ -124,8 +128,11 @@ function Node(name_, $div_) {
 		this.$myDiv.css(this.position);
 		// this.updatePreviousPosition();
 	}
-
+	this.activateNode=function(){
+		this.$myDiv.addClass("active");
+	}
 	this.activateConnections=function(){
+
 		for(key in this.connectionsSVGChildrenDict){
 			// console.log("this.activate("+key+")")
 			// this.connectionsSVGChildrenDict[key].$div.find('path').addClass("active")

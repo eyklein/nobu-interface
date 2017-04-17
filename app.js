@@ -60,10 +60,12 @@ app.get('/intents',routes.intents);
 
 app.post('/addEntities',routes.addEntitiesToDB);
 app.post('/addIntents',routes.addIntentsToDB);
+app.post('/addNodes',routes.addNodesToDB);
 
 
 app.get('/getLatestEntities', routes.getLatestEntities);
 app.get('/getLatestIntents', routes.getLatestIntents);
+app.get('/getLatestNodes', routes.getLatestNodes);
 
 
 

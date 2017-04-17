@@ -20,7 +20,7 @@ var nameValidation = function(val) {
 // })
 
 var entitiesSchema = new Schema({
-	json : { type: Array },
+	json : [{}],
 	dateAdded : { type: Date, default: Date.now }
 })
 

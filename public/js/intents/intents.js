@@ -57,8 +57,12 @@ $(document).ready(function() {
 
 function processJSON(data){
 	
-	data=JSON.parse(data.json)
+	// data=JSON.parse(data.json)
+	// console.log(data)
+	data=data.json
+	console.log(data)
 	for(i =0; i<data.length; i++){
+		console.log(data[i])
 		// console.log(data[i].classification)
 		var classification = data[i].classification
 		$div = $("#"+classification)
@@ -67,9 +71,7 @@ function processJSON(data){
 			
 		}
 		newPhrase($div, data[i].phrase)
-
 	}
-
 }
 
 
@@ -148,35 +150,23 @@ function createJSON(){
 
 
 	// entitySend = {"json":entities}
-	intintsSend = {"json":JSON.stringify(intentPhrases)}
+	console.log(typeof(intentPhrases))
+	intintsSend = intentPhrases
 
-	post('/addIntents',intintsSend)
+
+	$.ajax({
+        url: '/addIntents',
+        type: 'POST',
+        data: {
+            "jsonArray": JSON.stringify(intentPhrases)
+        },
+        success: function(data){
+            console.log(data);
+        }
+    });
 }
 
-function post(path, params, method) {
-    method = method || "post"; // Set method to post by default if not specified.
 
-    // The rest of this code assumes you are not using a library.
-    // It can be made less wordy if you use one.
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
-
-    for(var key in params) {
-    	console.log("my key : " + key)
-        if(params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
-
-            form.appendChild(hiddenField);
-         }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-}
 
 
 

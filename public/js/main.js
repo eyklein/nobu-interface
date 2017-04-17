@@ -1,34 +1,29 @@
 // when the page is loaded...
 jQuery(document).ready( function() {
-    // turn on validation for all forms
-    // we are using jQuery's validate, which is found in js/vendor
-    // see http://jqueryvalidation.org/validate
 
-    
-    // jQuery('form').validate();
-
-    // // ajax for upvoting on click of #upvote
-    // jQuery(".upvote").click(function(e) {
-
-    // 	var slug = event.target.getAttribute("data-slug");
-
-	   //  jQuery.ajax({
-	   //      url : '/food/'+slug+'/upvote',
-	   //      type : 'GET',
-	   //      success : function(response){
-	   //      	console.log(response);
-	   //      	// increase the count by 1 
-	   //      	var count = response.upvotes + 1;
-	   //      	// update the DOM
-	   //      	jQuery('#upvote-'+response._id).text(count);
-	   //      },
-	   //      error : function(err){
-	   //      	alert("upvoting went wrong");
-	   //      }
-	   //  });
-
-	   //  e.preventDefault();
-	   //  return false;    	
-
-    // });
 });
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+    	console.log("my key : " + key)
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}

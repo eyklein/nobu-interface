@@ -224,7 +224,8 @@ function ConnectionSVGMouse(fromNode_){
 		this.$div.addClass(this.type)
 		this.$div.html(this.getSVGCode())
 		// console.log(this.$div)
-		$("#svg-connections").append(this.$div)
+		$("#svg-connections").append(
+			this.$div)
 	}
 
 	this.update=function(){
@@ -243,8 +244,8 @@ function ConnectionSVGMouse(fromNode_){
 
 		fromOffset = this.fromNode.getOutputPossition()
 
-		hight= mouseY - fromOffset.top
-		width= mouseX - fromOffset.left
+		hight= mouseY - fromOffset.top -80
+		width= mouseX - fromOffset.left -10
 
 
 

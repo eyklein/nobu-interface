@@ -21,7 +21,7 @@ var nameValidation = function(val) {
 
 
 var intentsSchema = new Schema({
-	json : { type: Array },
+	json : [{}],
 	dateAdded : { type: Date, default: Date.now }
 })
 
