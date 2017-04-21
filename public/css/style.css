@@ -54,6 +54,15 @@ a:hover{text-decoration: none;opacity: 0.8; color: #9a63c9;}
 	padding: 15.5px;
 }
 
+button.save{
+	background-color: #b3b3b3;
+    font-family: Open Sans;
+    font-size: 18px;
+    border: none;
+    position: absolute;
+    margin: 20;
+    margin-left: 30px;
+}
 
 
 

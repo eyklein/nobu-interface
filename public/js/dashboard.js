@@ -71,6 +71,14 @@ $(document).on("click", '.delete-node', function(){
 $(document).on('change', "#input-node-name-dash", function() {
 	//remove space
 	var inputVal = $(this).val().replace(/ /g, "_")
+	isUnique=false
+	while(!isUnique){
+		if(inputVal in nodeObjs.nodesDict){
+			inputVal=inputVal+"_"+Math.floor(Math.random()*100);
+		}else{
+			isUnique=true;
+		}
+	}
 	$(this).val(inputVal);
 
 	//change the name of the key, node object, parent div, and connetion ids
@@ -142,14 +150,18 @@ $(document).on('click', "#dashboard", function(e) {
 
 
 
-
+function nodeFocus(nodeName_){
+	$('.active').removeClass("active");
+	clickedNode = nodeObjs.nodesDict[nodeName_]
+	dashboard.show(clickedNode);
+}
 
 
 
 function Dashboard(){
 	this.$dash=$('#dashboard');
 
-	this.currentNode //= nodeObjs.nodesDict['start'];
+	this.currentNode //;= nodeObjs.nodesDict['start'];
 	this.isVisable=false
 
 	this.inputConsole
@@ -176,6 +188,7 @@ function Dashboard(){
 
 
 		// node_.$myDiv.addClass("active");
+		if(location.pathname == "/dialogue")
 		node_.activateNode();
 		node_.activateConnections();
 
@@ -252,7 +265,10 @@ function Dashboard(){
 			
 
 		}
-		new Treant(new Chart(this.currentNode).getChart());
+		if(this.currentNode && location.pathname == '/dialogue'){ //?????????????********
+			console.log(this.currentNode)
+			new Treant(new Chart(this.currentNode).getChart());
+		}
 
 		newOutputDiv = $(".output-dash-template").clone();
 		$("#outputs-dash").append(newOutputDiv);

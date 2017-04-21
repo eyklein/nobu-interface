@@ -57,15 +57,23 @@ app.get('/', routes.index); // calls index function in /routes/index.js
 app.get('/dialogue',routes.dialogue);
 app.get('/entities',routes.entities);
 app.get('/intents',routes.intents);
+app.get('/test',routes.test);
+app.get('/stopList',routes.stopList);
+app.get('/animation',routes.animation);
+
 
 app.post('/addEntities',routes.addEntitiesToDB);
 app.post('/addIntents',routes.addIntentsToDB);
 app.post('/addNodes',routes.addNodesToDB);
+app.post('/addLearning',routes.addLearningToDB);
 
 
 app.get('/getLatestEntities', routes.getLatestEntities);
 app.get('/getLatestIntents', routes.getLatestIntents);
 app.get('/getLatestNodes', routes.getLatestNodes);
+app.get('/getLearningIntents', routes.getLearningIntents);
+
+app.post('/deleteAllLearning', routes.deleteAllLearning);
 
 
 

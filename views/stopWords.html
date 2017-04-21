@@ -1,0 +1,41 @@
+
+<script type="text/javascript" src="/js/stopWords/stopWords.js"></script>
+
+
+
+
+
+
+<div class="container-fluid">
+  <div class="row">
+  	<div class="col-md-12">
+      <div class="well bs-component">
+      	<form action="/addEntities" method='POST'>
+          <fieldset id="learningPhrasesFieldSet">
+
+                                  
+          </fieldset>
+          <br><br>
+      		<fieldset id="intentFieldSet">
+            
+            <!-- this is where the list lives  -->                 
+      		</fieldset>
+          <button id="newStopWord" type="button">StopWord</button>
+      	</form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div id="phrase_template" class="phrase col-lg-offset-1 row grid" style="display: none;"> 
+  <div class="row">
+    <button class="remove-phrase addRemove remove col-lg-offset-0 col-md-offset-0" type="button">-</button>
+    <input class="input-phrase col-lg-6 col-md-6 col-sm-6" type="text" name="unknownYet" placeholder="..."></input><div class="tokens"></div>
+  </div>
+  <!-- <button class="new-value-button addRemove col-lg-offset-1 col-md-offset-1 col-sm-offset-1 row" type="button">+</button> -->
+</div>
+
+

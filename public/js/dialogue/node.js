@@ -1,4 +1,4 @@
-function Node(name_, $div_) {
+function Node(name_) {
 	this.name = null;
 	this.output = new Output(this);
 	this.parent = null;
@@ -13,7 +13,7 @@ function Node(name_, $div_) {
 	this.updated = "2017-03-10T22:45:26.650Z";
 	this.metadata = null;
 	this.description = null;
-	this.type = "hierarchy"
+	// this.type = "hierarchy"
 
 	this.cPosition={"x":0,"y":0}
 	this.pPosition={"x":0,"y":0}
@@ -26,18 +26,24 @@ function Node(name_, $div_) {
 	this.connectionsSVGChildrenDict={};
 	this.SVGMidBarHight= 30;
 	this.SVGMidBarWidth= 30;
+	this.$myDiv;
+	this.type="hierarchy"
 
 
+	this.addDiv=function($div_){
 
+		this.$myDiv = $div_;
+		this.$myDiv.show();
 
+		this.$SVGInput=this.$myDiv.find(".horazontal-shift-bar")
+		this.$SVGInput.val(30)
+		// this.$parrentConnectionDiv = null;
 
-	this.$myDiv = $div_;
-	this.$myDiv.show();
+		this.$nameDiv = this.$myDiv.find('.node-name')
+		// this.changeName(this.name)
+		this.changeDivName(this.name)
 
-	this.$SVGInput=this.$myDiv.find(".horazontal-shift-bar")
-	this.$SVGInput.val(30)
-	// this.$parrentConnectionDiv = null;
-	this.$nameDiv = this.$myDiv.find('.node-name')
+	}
 
 	// set name at bottom V
 	this.getJSON = function(){
@@ -81,7 +87,8 @@ function Node(name_, $div_) {
 
 	this.processJSON = function(data){
 		this.changeConditions(data.conditions);
-		this.setType(data.type)
+		this.type = data.type
+		// this.setType(data.type)
 
 		this.position=data.position;
 
@@ -90,19 +97,21 @@ function Node(name_, $div_) {
 		
 		if(data.parent){
 			this.addParent(nodeObjs.nodesDict[data.parent])
-
-			// if(data.previous_sibling == null){
-			// 	// this.addParentConnection(nodeObjs.nodesDict[data.parent])
-			// 	nodeObjs.nodesDict[data.parent].addConnectionTo(this, "parentChild")
-
-			// }
-			// else{
-			// 	nodeObjs.nodesDict[data.parent].addConnectionTo(this, "sibling")
-			// 	// this.addSiblingConnection(nodeObjs.nodesDict[data.previous_sibling])
-			// }
 		}
 
+		// console.log("data.go_to*******************")
+
+		// console.log(this.name+ ":   " )
+		// console.log(data.go_to)
 		this.gotoRedirect.setValuesJSON(data.go_to)
+		// if(data.go_to){
+		// 	console.log(this.name+ ":   " )
+		// 	console.log(data.go_to)
+		// 	console.log("---------------------------------" )
+		// 	console.log(this.gotoRedirect)
+		// 	console.log("----------------**-----------------" )
+
+		// }
 		//if goto
 		// if(this.type == "goto"){
 		// 	this.gotoRedirect.setValues(data.go_to)
@@ -121,7 +130,7 @@ function Node(name_, $div_) {
 				this.output.insertValue(data.output.text.values[i])
 			}
 		}
-		this.setHasOutput()
+		// this.setHasOutput()
 	}
 
 	this.placePosition = function(){
@@ -230,7 +239,13 @@ function Node(name_, $div_) {
 
 	}
 	this.getPosition = function(){
-		return this.$myDiv.position();
+		// console.log(this.$myDiv.css('position'))
+		// if(this.$myDiv.css('position')=="fixed"){
+
+		// }else{
+			return this.$myDiv.position();
+		// }
+		
 	}
 	this.updatePreviousPosition = function(){
 		this.pPosition=this.cPosition
@@ -255,6 +270,9 @@ function Node(name_, $div_) {
 	this.changeName = function(name_) {
 		//change key first so we dont override the old key
 		nodeObjs.changeKey(this.name, name_)
+		this.name = name_;
+
+	}
 			//change connections id's
 		// if ($('.connection.' + this.name).length) {
 		// 	$('.connection.' + this.name).addClass(name_)
@@ -262,12 +280,13 @@ function Node(name_, $div_) {
 			
 		// }
 
-		this.name = name_;
-		$div_.attr('id', name_);
+	// 	this.name = name_;
+		
 
-	}
+	// }
 	this.changeDivName = function(name_) {
 		this.$nameDiv.html(name_);
+		this.$myDiv.attr('id', name_);
 	}
 	this.removeDiv = function(){
 		this.$myDiv.remove();
@@ -318,7 +337,7 @@ function Node(name_, $div_) {
 
 
 	this.setType = function(type_){
-
+		type_=type_ || this.type
 		this.$myDiv.find('.connect-out').removeClass("hierarchy-out")
 		this.$myDiv.find('.connect-out').removeClass("heterarchy-out")
 		this.$myDiv.find('.connect-out').removeClass("goto-out")
@@ -328,25 +347,23 @@ function Node(name_, $div_) {
 
 		if(this.connection){
 			this.connection.changeType(type_)
-			// this.changeConnection(type_);
 		}
 
 
 
 		this.type=type_;
 
-		// this.refreshConnectionToChildren()
+		
 
 
 		if(type_ == "goto" || type_ == "redirect" ){
 			this.removeChildren()
-			this.removeGotoRedeirect()
-			// this.removeParent();
+
 
 		}else{
 
 			this.removeGotoRedeirect()
-			// this.updateConnections()
+			// this.updateConnectionsSVG()
 			// this.refreshConnectionToChildren()
 		}
 
@@ -370,11 +387,14 @@ function Node(name_, $div_) {
 	// }
 
 	this.sortChildren = function(){
+		// console.log(this.children)
 		this.children = this.children.sort(function(a, b) {
-			if(a.$myDiv.position().left != b.$myDiv.position().left){
-				return a.$myDiv.position().left>b.$myDiv.position().left
-			}else{
-				return a.$myDiv.position().top>b.$myDiv.position().top
+			if(a.$myDiv.position().left>b.$myDiv.position().left){
+				return 1
+			}else if(a.$myDiv.position().left == b.$myDiv.position().left){
+				return 0
+			}else if(a.$myDiv.position().left < b.$myDiv.position().left){
+				return -1
 			}
 		})	
 		return(this.children)
@@ -441,10 +461,17 @@ function Node(name_, $div_) {
 
 
 	this.snapToGrid = function(gridSide = 50) {
-		this.$myDiv.css({
-			top: Math.round(this.getPosition().top / gridSide) * gridSide,
-			left: Math.round(this.getPosition().left / gridSide) * gridSide
-		});
+		
+			this.$myDiv.css({
+				// $(document).scrollLeft()
+				// top: ((mouseY-100) / gridSide) * gridSide,
+				// left: ((mouseX-40) / gridSide) * gridSide
+				
+				top: (Math.round(this.getPosition().top) / gridSide) * gridSide,
+				left: (Math.round(this.getPosition().left) / gridSide) * gridSide
+				
+			});
+		
 	}
 
 
@@ -623,21 +650,23 @@ function Node(name_, $div_) {
 
 
 	this.name = name_;
-	this.changeDivName(name_);
-	this.changeName(name_);
+	// this.changeDivName(name_);
+	// this.changeName(name_);
 
 
 }
 
 function Nodes(name_) {
-	this.nodesDict = []
+	this.nodesDict = {}
 
-	this.addNode = function($div_, name_ = "id_" + Math.floor(Math.random() * 1000)) {
-		this.nodesDict[name_] = new Node(name_, $div_)
+	this.addNode = function(name_ = "id_" + Math.floor(Math.random() * 1000)) {
+		// console.log(name_)
+		this.nodesDict[name_] = new Node(name_)
 		return this.nodesDict[name_];
 	}
 
 	this.changeKey = function(oldKey, newKey) {
+		console.log("301")
 		this.nodesDict[newKey] = this.nodesDict[oldKey];
 		delete this.nodesDict[oldKey]
 	}

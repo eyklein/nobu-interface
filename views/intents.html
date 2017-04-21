@@ -1,5 +1,23 @@
 
 <script type="text/javascript" src="/js/intents/intents.js"></script>
+<script type="text/javascript" src="/js/intents/addLearning.js"></script>
+<link rel="stylesheet" href="css/vendor/prism/chosen.css">
+
+<!-- <link rel="stylesheet" href="css/vendor/prism/style.css">
+<link rel="stylesheet" href="css/vendor/prism/prism.css">
+<link rel="stylesheet" href="css/vendor/prism/chosen.css"> -->
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"> -->
+
+<!-- <script src="http://code.jquery.com/ui/1.8.3/jquery-ui.js"></script> -->
+
+
+
+<!-- <script src="js/vendor/prism/chosen.jquery.js"></script>
+<link rel="stylesheet" href="css/vendor/prism/chosen.css"> -->
+
+
+
+
 
 <link rel="stylesheet" type="text/css" href="/css/intents/style.css">
 <div class="container-fluid">
@@ -7,15 +25,21 @@
   	<div class="col-md-12">
       <div class="well bs-component">
       	<form action="/addEntities" method='POST'>
+          <fieldset id="learningPhrasesFieldSet">
+
+                                  
+          </fieldset>
+          <br><br>
       		<fieldset id="intentFieldSet">
             
                                 
       		</fieldset>
           <button id="newIntent" type="button">New Intent</button>
-          <button id="saveJSON"  type="button">save json</button>
+          <!-- <button id="saveJSON"  type="button">save json</button> -->
       	</form>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -37,18 +61,41 @@
 
 
 <div id="phrase_template" class="phrase col-lg-offset-1 row grid" style="display: none;"> 
-
   <div class="row">
     <button class="remove-phrase addRemove remove col-lg-offset-0 col-md-offset-0" type="button">-</button>
-    <input class="input-phrase col-lg-6 col-md-6 col-sm-6" type="text" name="unknownYet" placeholder="..."></input>
-
+    <input class="input-phrase col-lg-6 col-md-6 col-sm-6" type="text" name="unknownYet" placeholder="..."></input><div class="tokens"></div>
   </div>
-
-
   <!-- <button class="new-value-button addRemove col-lg-offset-1 col-md-offset-1 col-sm-offset-1 row" type="button">+</button> -->
 </div>
 
+<div id="phrase_learning_template" class="learning-phrase col-lg-offset-1 row grid" style="display: none;"> 
+  <div class="row">
+    <button class="remove-learning-phrase addRemove remove col-lg-offset-0 col-md-offset-0" type="button">-</button>
+    <input class="input-learning-phrase col-lg-6 col-md-6 col-sm-6" type="text" name="unknownYet" placeholder="..."></input><div class="tokens"></div>
 
+    <div class="right selector-div">
+      <select class="chzn-select classification-sellector right" name="faculty" style="width:200px;">
+              
+      </select>
+      <button type="button" class="right approve-intent"> &#10003;</button>
+    </div>
+      <!-- <script type="text/javascript">$(".chzn-select").chosen();</script> -->
+        
+  </div>
+
+</div>
+
+
+
+<script src="js/vendor/prism/chosen.jquery.js" type="text/javascript"></script>
+<!-- <script src="js/vendor/prism/prism.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/vendor/prism/init.js" type="text/javascript" charset="utf-8"></script> -->
+
+
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css"> -->
+
+<!-- <body> -->
 
 
 

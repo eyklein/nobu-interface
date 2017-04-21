@@ -2,7 +2,7 @@
 	background-color: lightgray;
 }
 #show-console{
-	font-size: 40;
+	font-size: 40px;
 	color:red;
 }
 .console-input{
@@ -23,15 +23,16 @@
 }
 .speech-mic {
     background: url("../mic.gif") no-repeat 50% 50%;
-    width:50;
-    height: 50;
+    width:50px;
+    height: 50px;
+    background-color: red;
     background-size: contain;
 }
 
 .speech-mic-works {
     background: url("../mic-animate.gif") no-repeat 50% 50%;
-    width:50;
-    height: 50;
+    width:50px;
+    height: 50px;
     background-size: contain;
 }
 

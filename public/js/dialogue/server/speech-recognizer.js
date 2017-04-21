@@ -1,28 +1,21 @@
 var resultArea;
 var textArea;
+var recognition;
 
 (function($) {
 
     $(document).ready(function() {
         
         try {
-            var recognition = new webkitSpeechRecognition();
+            recognition = new webkitSpeechRecognition();
         } catch(e) {
-            var recognition = Object;
+            recognition = Object;
         }
         recognition.continuous = true;
         recognition.interimResults = true;
 
         var interimResult = '';
-        // textArea = $('#dashboard.console.console-input');
-        // var textAreaID = 'console-input';
 
-        // resultArea = $('#dashboard.console.console-response');
-
-        // textArea.keypress(){
-        //     console.log("what this 20")
-        // }
-        // textArea.on( "keypress", submitRequest);
         $(document).on('keypress', ".console-input.active",submitRequest);
         $(document).on('keyup', ".console-input.active",removeLine);
         
@@ -46,33 +39,19 @@ var textArea;
 
         
         $(document).on('click', ".speech-mic", function() {
-            // startRecognition();
-            $(".speech-mic").addClass("speech-mic-works")
-            $(".speech-mic").removeClass("speech-mic")
-            
             try{
                 startRecognition();
             }catch(e){
-                recognition.stop();
+                // recognition.stop();
             }
         });
 
 
         $(document).on('click', ".speech-mic-works", function() {
-            $(".speech-mic-works").addClass("speech-mic")
-            $(".speech-mic-works").removeClass("speech-mic-works")
-            recognition.stop();
+            stopRecogniyion()
         });
 
-        var startRecognition = function() {
-            console.log("start recognition 0")
-            $('.speech-content-mic').removeClass('speech-mic').addClass('speech-mic-works');
-            console.log("start recognition 1")
-            dashboard.inputConsole.focus();
-            console.log("start recognition 2")
-            recognition.start();
-            console.log("start recognition 3")
-        };
+        
 
         recognition.onresult = function (event) {
             // console.log(event)
@@ -118,3 +97,20 @@ var textArea;
         };
     });
 })(jQuery);
+
+var startRecognition = function() {
+    if(typeof(speak)=="function"){
+        speak()
+    }
+    $('.speech-mic').removeClass('speech-mic').addClass('speech-mic-works');
+    dashboard.inputConsole.focus();
+    recognition.start();
+};
+var stopRecogniyion = function(){
+    if(typeof(stopSpeak)=="function"){
+        stopSpeak()
+    }
+    $(".speech-mic-works").addClass("speech-mic")
+    $(".speech-mic-works").removeClass("speech-mic-works")
+    recognition.stop();
+}

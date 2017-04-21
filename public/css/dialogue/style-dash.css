@@ -2,7 +2,7 @@
 	padding:30px;
 	position:fixed;
 	top:0px;
-	width:800px;
+	width:500px;
 	height:100%;
 	z-index: 1000;
 	background-color: lightgray;
@@ -13,7 +13,7 @@
 	right:0px;
 }
 .dashboard-off{
-	right:-780px;
+	right:-480px;
 }
 
 #input-node-name-dash{

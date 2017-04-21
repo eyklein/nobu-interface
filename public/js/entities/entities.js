@@ -3,11 +3,11 @@
 $(document).ready(function() {
 	console.log("loaded...")
 
-	$("#saveJSON").click(function() {
+	// $("#saveJSON").click(function() {
 
-		createJSONText("data/save.json")
+	// 	createJSONText("data/save.json")
 
-	});
+	// });
 
 
 
@@ -196,7 +196,10 @@ function newValue($parent, valueIn){
 	newVal.find(".input-value").val(valueIn);
 }
 
-function createJSONText(data){
+
+
+
+function saveData(data){
 	
 	// $("#JSON-output").html($("#content").find(".input-entity").length)
 	console.log($("#entityFieldSet").find(".input-entity"))
@@ -240,10 +243,7 @@ function createJSONText(data){
         success: function(data){
             console.log(data);
         }
-    });
-
-
-	
+    });	
 
 }
 

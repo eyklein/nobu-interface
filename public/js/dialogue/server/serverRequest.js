@@ -46,9 +46,7 @@ function sendRequest(text, forcedNode=null){
 	
     var xhr = createCORSRequest('POST', "https://eyk287.itp.io:5000/getAudio", nodeLoadResponce);
     // var xhr = createCORSRequest('POST', "https://eyk287.itp.io:5000/getAudio");
-    console.log(body);
-    console.log("FUCK THIS SHIT")
-    console.log(JSON.stringify(body));
+   
     xhr.send(JSON.stringify(body));
     console.log("Sent!")
 
@@ -100,7 +98,7 @@ function sendForceNodeRequest(forcedNode){
 	
     var xhr = createCORSRequest('POST', "https://eyk287.itp.io:5000/forceSetNode", nodeLoadResponce);
     // var xhr = createCORSRequest('POST', "https://eyk287.itp.io:5000/getAudio");
-    console.log(body);
+   
 
     xhr.send(JSON.stringify(body));
 
@@ -209,6 +207,8 @@ function createCORSRequest(method, url, onLoad=null) {
 	xhr.withCredentials = true;
 	xhr.onload = function() {
 		// onLoad.bind(xhr)
+		stopRecogniyion()
+
 		var response = xhr.responseText;
 		console.log(response)
 
@@ -219,7 +219,24 @@ function createCORSRequest(method, url, onLoad=null) {
 		
 
 		var audio = new Audio("https://eyk287.itp.io:5000/"+ response['saveDir']);
-		audio.play();
+		audio.play()
+		audio.onloadedmetadata = function() {
+			console.log("TIME " + audio.duration);
+		  setTimeout(function(){
+				try{
+
+	                startRecognition();
+	            }catch(e){
+	            	console.log("error!!!!!!!!!!!!!")
+	            	console.log(e)
+	                // recognition.stop();
+	            }
+			}, audio.duration*1000);
+		};
+		
+		
+
+		
 	}
 
 	xhr.onerror = function() {

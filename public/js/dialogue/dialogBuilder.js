@@ -30,10 +30,7 @@ var intervalMouse
 
 //------------------------------------------ on load -------------------------------------------------
 $(document).ready(function() {
-	console.log("loaded...")
-
-	// nodeObjs = new Nodes();
-
+	
 
 	
 	// $.ajax({
@@ -70,7 +67,8 @@ $(document).ready(function() {
 
 	// on mouse release of dranging the new node into the sketch
 	$(document).on('mouseup', "#console-node", function() {
-		newNode = nodeObjs.addNode($(this))
+		newNode = nodeObjs.addNode()
+		newNode.addDiv($(this))
 
 		placeNode(newNode)
 		// add new node to console
@@ -259,7 +257,7 @@ $(document).ready(function() {
 
 	// ___________________________________________ show console __________________________________________
 	$(document).on('click', "#show-console", function() {
-		$( "#console" ).toggle();
+		$( ".console" ).toggle();
 	});
 
 
@@ -267,14 +265,22 @@ $(document).ready(function() {
 	//dropdown
 	$(document).on('click', ".responceStructure", function() {
 		// nodeObjs.nodesDict[$(this).parent().parent().parent().parent().find(".node-name").html()].changeType($(this).html());
-		nodeObjs.nodesDict[$(this).parent().parent().parent().parent().find(".node-name").html()].setType($(this).html());
+		var nodeUpdating = nodeObjs.nodesDict[$(this).parent().parent().parent().parent().find(".node-name").html()]
+		nodeUpdating.setType($(this).html());
+		nodeUpdating.updateConnectionsSVG()
 	});
 
+	// $(document).on('click', '.dropdown-toggle', function(){    
+	// 	// $(this).html($(this).html() + '<span class="caret"></span>');  
+	   
+	// });
 
 
-	$(document).on('click', ".mainNode", function() {
-		
-		nodeFocus($(this).find(".node-name").html())
+
+	$(document).on('click', ".mainNode", function(e) {
+		if(!$(e.target).hasClass("btn")){
+			nodeFocus($(this).find(".node-name").html())
+		}
 	});
 
 
@@ -323,6 +329,24 @@ $(document).ready(function() {
 
 });
 
+
+function initalizeDivs(){
+
+	for(var key in nodeObjs.nodesDict){
+		nodeObjs.nodesDict[key].addDiv(newNodeConsole($("#content")));
+		nodeObjs.nodesDict[key].setType();
+		nodeObjs.nodesDict[key].setHasOutput()
+	}
+
+	for (var key in nodeObjs.nodesDict) {
+		nodeObjs.nodesDict[key].placePosition();
+	}
+
+	for (var key in nodeObjs.nodesDict) {
+		nodeObjs.nodesDict[key].updateConnectionsSVG();
+	}
+}
+
 cloneCount = 0;
 
 function newNodeConsole(parent) {
@@ -330,12 +354,14 @@ function newNodeConsole(parent) {
 	newNodeDiv = $("#node_template").clone().attr('id', "console-node").attr('style', 'curved').appendTo(parent);
 	console.log(newNodeDiv)
 	newNodeDiv.draggable()
-	newNodeDiv.offset({
-		top: 20,
-		left: 20
-	});
+	// newNodeDiv.offset({
+	// 	top: 20,
+	// 	left: 20
+	// });
+	$('#console-node').css('top', $(this).scrollTop() + "px");
+	$('#console-node').css('left', $(this).scrollLeft() + "px");
 
-	newNodeDiv.find("toggle-horazontal-shit-bar").draggable()
+	// newNodeDiv.find("toggle-horazontal-shit-bar").draggable()
 	return newNodeDiv
 }
 
@@ -343,47 +369,19 @@ function newNodeConsole(parent) {
 
 
 
+// function nodeFocus(nodeName_){
+// 	$('.active').removeClass("active");
+// 	clickedNode = nodeObjs.nodesDict[nodeName_]
+// 	dashboard.show(clickedNode);
+// }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function nodeFocus(nodeName_){
-	$('.active').removeClass("active");
-	clickedNode = nodeObjs.nodesDict[nodeName_]
-	dashboard.show(clickedNode);
-}
-
-
-
-
-
-
-
-function exportJSON(){
+function saveData(){
 	jsonOut=[]
 	for(var key in nodeObjs.nodesDict){
-		//console.log(nodeObjs.nodesDict[key].getJSON())
 		jsonOut.push(nodeObjs.nodesDict[key].getJSON());
 	}
-	// sendJSONNodes(jsonOut)
-	// post('/addNodes',{"json":JSON.stringify(jsonOut)})
-	// return JSON.stringify(jsonOut);
 	$.ajax({
         url: '/addNodes',
         type: 'POST',
@@ -392,9 +390,33 @@ function exportJSON(){
         },
         success: function(data){
             console.log(data);
+            sendTask("retrain")
         }
     });
 }
+
+
+
+// function exportJSON(){
+// 	jsonOut=[]
+// 	for(var key in nodeObjs.nodesDict){
+// 		//console.log(nodeObjs.nodesDict[key].getJSON())
+// 		jsonOut.push(nodeObjs.nodesDict[key].getJSON());
+// 	}
+// 	// sendJSONNodes(jsonOut)
+// 	// post('/addNodes',{"json":JSON.stringify(jsonOut)})
+// 	// return JSON.stringify(jsonOut);
+// 	$.ajax({
+//         url: '/addNodes',
+//         type: 'POST',
+//         data: {
+//             "jsonArray": JSON.stringify(jsonOut)
+//         },
+//         success: function(data){
+//             console.log(data);
+//         }
+//     });
+// }
 
 
 function placeNode(node_){

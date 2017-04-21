@@ -4,14 +4,42 @@
 
   <script type="text/javascript" src="/js/vendor/jquery-3.2.0.js"></script>
   <script type="text/javascript" src="/js/vendor/jquery-ui.js"></script>
+
+ <!--  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ -->
+  <link rel="stylesheet" type="text/css" href="css/dialogue/style-console.css">
   <link rel="stylesheet" type="text/css" href="css/dialogue/style-dash.css">
   <script type="text/javascript" src="js/dashboard.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 
 
 
+    <script src="js/vendor/treant/raphael.js"></script>
+    <script src="js/vendor/treant/Treant.js"></script>
+    <script src="js/vendor/treant/timeline.js"></script>
+
+
+
   <script type="text/javascript" src="js/main_nodes.js"></script>
   <script type="text/javascript" src="js/dialogue/node.js"></script>
+
+  <script type="text/javascript" src="js/main_intents.js"></script>
+
+  <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="js/dialogue/server/textarea-helper.js"></script>
+ <script type="text/javascript" src="js/dialogue/server/speech-recognizer.js"></script>
+ <script type="text/javascript" src="js/dialogue/server/serverRequest.js"></script>
+ <script type="text/javascript" src="js/dialogue/server/api-ai-javascript/target/ApiAi.js"></script> 
+
+
+
 
 <html class="no-js">
     <head>
@@ -27,6 +55,14 @@
         <link rel="stylesheet" href="/css/style.css">
 
         <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+
+
+        
+
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js" type="text/javascript"></script> -->
+          
+        
 
        <!--  <script type="text/javascript" src="/js/vendor/jquery-3.2.0.js"></script>
         <script type="text/javascript" src="js/jquery-connections-gh-pages/jquery.connections.js"></script>  -->
@@ -55,7 +91,22 @@
             <a href="/dialogue">
                 Dialogue
             </a>       
-        </div> 
+        </div>
+        <!-- <div class="navbar">
+            <a href="/stopList">
+                Stop Words
+            </a>       
+        </div> -->
+        <div class="navbar">
+            <a href="/animation">
+                Animation
+            </a>       
+        </div>
+        <div class="navbar">
+            <button class="save">
+                Save
+            </button>       
+        </div>
 
     </div>
     <div id = "dashboard" class = "dashboard-off">
@@ -79,3 +130,84 @@
     <!-- custom js -->
     <!-- <script src="/js/main.js"></script> -->
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class = "dashboard_template dashboard-on" style="display: none;">
+         <button id ="show-console">  >_  </button>
+         <br>
+         <div class="console">
+            <br><br>
+            <div class="console-response"></div>
+            <h3>Console</h3>
+            <textarea class="console-input"></textarea><div class="speech-mic"></div>
+            <br>
+         </div>
+
+         <div class="line"></div>
+         <br>
+         
+
+         <h3>Node <button class ="force-node">  Force </button></h3>
+         <input id="input-node-name-dash"></input>
+
+
+         <div class="chart" id="OrganiseChart-simple" width="100%">
+         </div>
+
+         
+         <div id="node-content-dash">
+            <br>
+            <h4>Conditions</h4>
+            <div id = 'conditions-dash'>
+               <input id="conditions-input-dash">
+            </div>
+            <h4>Outputs</h4>
+            <ul id="outputs-dash">
+          </ul>
+          <br><br>
+         
+
+          <br><br>
+          <h1 id="next-classification"></h1>
+          <ul id="next-dash">
+             
+          </ul>
+          <br><br>
+          <h4>Parent</h4>
+          <div id="parent-dash"></div>
+
+          <br><br>
+          <button class="delete-node">XX Delete Node XX </button>
+             
+          </ul>
+
+       </div>
+   </div>

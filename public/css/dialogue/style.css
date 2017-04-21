@@ -38,10 +38,8 @@ html, body {
 }
 #console-node{
 	opacity: 0.5;
-	/*position: fixed;*/
 	top:0px;
 	left:0px;
-
 }
 
 
@@ -67,7 +65,7 @@ input{
 	margin: 10px;
 }
 
-button{
+button.connect{
 	border: none;
 	background-color: transparent;
 }

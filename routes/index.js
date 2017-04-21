@@ -8,6 +8,7 @@
 var Entity = require("../models/entity.js"); //our db model
 var Intent = require("../models/intent.js"); //our db model
 var Nodes = require("../models/nodes.js"); //our db model
+var Learning = require("../models/learningIntent.js"); //our db model
 
 /*
 	GET /
@@ -19,40 +20,17 @@ exports.index = function(req, res) {
 	
 	console.log("main page requested");
 
-	// we want to show all the foods that are already in the database
-
-	// query for all foods
-	// .find will accept 4 arguments
-	//  see http://mongoosejs.com/docs/api.html#model_Model.find
-	// 1) an object for filtering {} (empty here)
-	// 2) a string of properties to return, 'name slug upvotes photo recommendedB' will return only those attributes of the model
-	// 3) an object for sorting {sort:'-upvotes'}, the most upvoted will come first
-	// 4) callback function with (err, data)
-	//    err will include any error that occurred
-	//	  data is our resulting array of food objects returned from the database
-	// Entity.find({}, 'name slug upvotes photo recommendedBy',{sort:'-upvotes'}, function(err, data){
-
-	// 	if (err) {
-	// 		console.log(err);
-	// 		res.send("Unable to query database for food").status(500);
-	// 	};
-
-	// 	console.log("retrieved " + data.length + " food products from database");
-
-	// 	//build and render the template data object, which we will pass into the page
-	// 	var templateData = {
-	// 		entity : data,
-	// 		pageTitle : "ITP Snacks! (" + data.length + " Food Products)"
-	// 	}
-
-	// 	res.render('index.html', templateData);
-
-	// });
 
 }
 
 
+exports.test = function(req, res) {
+	
+	console.log("test page requested");
 
+	res.render('test.html');
+
+}
 
 exports.dialogue = function(req, res) {
 	
@@ -70,7 +48,7 @@ exports.dialogue = function(req, res) {
 		//build and render the template data object, which we will pass into the page
 		var templateData = {
 			entity : data,
-			pageTitle : "ITP Snacks! (" + data.length + " Food Products)"
+			pageTitle : "Willow"
 		}
 
 		res.render('dialogue.html', templateData);
@@ -92,6 +70,22 @@ exports.intents = function(req, res) {
 	console.log("intents page requested");
 
 	res.render('intents.html');
+
+}
+
+exports.stopList = function(req, res) {
+	
+	console.log("stopList page requested");
+
+	res.render('stopWords.html');
+
+}
+
+exports.animation = function(req, res) {
+	
+	console.log("animation page requested");
+
+	res.render('animation.html');
 
 }
 
@@ -157,17 +151,49 @@ exports.addNodesToDB = function(req, res) {
 };
 
 
+exports.addLearningToDB = function(req, res) {
+	console.log(req.body)
+	var learningSave = new Learning({
+		phrase : req.body.phrase,
+		classification : req.body.classification,
+		tokens: req.body["tokens[]"],
+		//??????????????????? [] 
+	});
+	
+	// save the food to the database
+	learningSave.save(function(err,data){
+		if (err) {
+			res.json('failure');
+
+		} else {
+			console.log("saved nodes")
+			res.json('success');
+		}
+	});
+};
+
+exports.deleteAllLearning = function(req, res) {
+
+	Learning.remove( { } )
+	console.log("FUCK this")
+	Learning.remove({}, function(err){
+		if (err){ 
+			console.error(err);
+			res.send("Error when trying to remove food: "+ requestedSlug);
+		}
+
+		res.send("Removed sucsess");
+	});
+	
+
+};
+
+
 
 
 exports.getLatestEntities = function(req, res){
 	// enetities = Entity.find({}, {sort:{$natural:-1}})
-	enetities = Entity.find().limit(1).sort({$natural:-1})
-	
-
-
-	enetities.exec(function(err, data){
-
-		// prepare data for JSON
+	Entity.find({}).limit(1).sort({dateAdded:-1}).exec(function(err, data){
 		var jsonData = {
 			status : 'OK',
 			json : data[0].json,
@@ -180,14 +206,10 @@ exports.getLatestEntities = function(req, res){
 
 
 exports.getLatestIntents = function(req, res){
-	// enetities = Entity.find({}, {sort:{$natural:-1}})
-	intent = Intent.find().limit(1).sort({$natural:-1})
-	
-
-
-	intent.exec(function(err, data){
-
-		// prepare data for JSON
+	// enetities = Entity.find({}, {sort:{$date:-1}})
+	Intent.find({}).limit(1).sort({dateAdded:-1}).exec(function(err, data){
+		console.log(data[0].dateAdded)	
+		console.log(data.length)	
 		var jsonData = {
 			status : 'OK',
 			json : data[0].json,
@@ -200,11 +222,7 @@ exports.getLatestIntents = function(req, res){
 
 exports.getLatestNodes = function(req, res){
 	// enetities = Entity.find({}, {sort:{$natural:-1}})
-	nodes = Nodes.find().limit(1).sort({$natural:-1})
-	
-
-
-	nodes.exec(function(err, data){
+	Nodes.find({}).limit(1).sort({dateAdded:-1}).exec(function(err, data){
 
 		// prepare data for JSON
 		var jsonData = {
@@ -216,6 +234,17 @@ exports.getLatestNodes = function(req, res){
 		res.json(jsonData);
 	});
 }
+exports.getLearningIntents = function(req, res){
+	// enetities = Entity.find({}, {sort:{$natural:-1}})
+	Learning.find({}).sort({dateAdded:-1}).exec(function(err, data){
+
+		
+
+		res.json(data);
+	});
+}
+
+
 
 
 
